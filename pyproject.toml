@@ -1,0 +1,33 @@
+[project]
+name = "aas-core-opc-ua-dev-scripts"
+version = "0.0.1"
+requires-python = ">=3.8"
+dependencies = [
+    "requests==2.*",
+    "aas-core-codegen@git+https://github.com/aas-core-works/aas-core-codegen.git#egg=aas-core-codegen@0c7131e"
+]
+
+[tool.setuptools.packages.find]
+include = ["dev_scripts*"]
+exclude = ["nodesets*", "continuous_integration*"]
+
+[project.optional-dependencies]
+dev = [
+    "black==25.1.0",
+    "mypy==1.16.0",
+    "pylint==3.3.7"
+]
+
+[tool.mypy]
+exclude = "dev_scripts/aas_metamodels/"
+python_version = "3.8"
+
+[[tool.mypy.overrides]]
+module = "requests.*"
+ignore_missing_imports = true
+
+[tool.pylint]
+disable = [
+    "too-many-locals",
+    "broad-exception-caught"
+]
